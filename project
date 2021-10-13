@@ -1,0 +1,138 @@
+from google_trans_new import google_translator  
+translator = google_translator()  
+english_txt = translator.translate(txt,lang_tgt='en',lang_src='te')  
+english_txt
+eng = english_txt.split()
+english_txt = ' '.join(eng)
+english_txt=english_txt.lower()
+english_txt
+arry=[i for i in english_txt]
+
+asc_list=[]
+for i in arry:
+    asc_list.append(ord(i))
+asc_list
+
+bin_list=[]
+for i in asc_list:
+    bin_list.append(bin(i))
+bin_list
+
+upd_bin_list=[]
+for i in bin_list:
+    upd_bin_list.append(i[2:])
+
+for i in range(len(upd_bin_list)):
+    upd_bin_list[i]=upd_bin_list[i].zfill(n)
+upd_bin_list
+
+def encryptmessage(key,message):
+    en=translatemessage(key,message,'encrypt')
+    return en
+
+def decryptmessage(key,message):
+    de=translatemessage(key,message,'decrypt')
+    return de
+
+def translatemessage(key,message,mode):
+    translated=[] 
+    keyIndex= 0
+ key=key.upper()
+    for symbol in message:
+        num = let.find(symbol.upper())
+        
+if num != -1:
+            if mode == 'encrypt':
+                num += let.find(key[keyIndex])
+            elif mode == 'decrypt':
+                num -= let.find(key[keyIndex])
+            num %= len(let)
+            if symbol.isupper():
+                translated.append(let[num])
+            elif symbol.islower():
+                translated.append(let[num].lower())
+            keyIndex += 1
+            if keyIndex == len(key):
+                keyIndex = 0
+      
+           else:
+            translated.append(symbol)
+    return ''.join(translated)
+
+let='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+def ende(mes,key,mode):
+    message=mes
+    key=key
+    mode=mode
+    if mode== 'encrypt':
+        translated= encryptmessage(key,message)
+    elif mode== 'decrypt':
+        translated= decryptmessage(key,message)
+    print('%sed Message:'%(mode.title()))
+    print(translated)
+    return translated
+
+message=input("Provide the message to encrypt/decrypt?  ")
+key=input("Key?  ")
+mode=input("Mode?  ")
+
+ende(message,key,mode)
+
+e=ende(english_txt,'SASTRA','encrypt')
+
+d=ende('ey ftde as jtmiuhsgurs','SASTRA','decrypt')
+
+result_txt=translator.translate(d,lang_tgt='te',lang_src='en')  
+
+#Given an input with Numbers included
+
+import re
+
+import random
+
+message=input("Provide the message to encrypt/decrypt?  ")
+key=input("Key?  ")
+mode=input("Mode?  ")
+iff=input('Give "int" if you want to encrypt number into another number, else give "char" to encrypt everthing to text')
+new=[]
+mess=message.split()
+l=re.findall('[0-9]+',message)  
+if (l!=[]):
+    for i in range(len(l)):
+        new.append(mess.index(l[i]))
+rand=[]
+
+for i in range(len(key)):
+    rand.append(i)
+if(iff=='int'):
+    for i in range(len(new)):
+        mess[new[i]]=str(ord(key[rand[i]]))
+elif(iff=='char'):
+    for i in range(len(new)):
+        mess[new[i]]=key[rand[i]]
+message_up=' '.join(mess)
+ende(message_up,key,mode)
+
+#Sample encryption and decryption of data using xor
+def datakey(data,key):
+    en=data^key
+    print("After Encryption: ",en)
+    de=en^key
+    print("After Decryption: ",de)
+
+data=int(input('Data: '))
+key=int(input('Key: '))
+datakey(data,key)
+
+path=input('Path: ') 
+key=int(input('Key: '))
+file=open(path,'rb') 
+image=file.read() 
+file.close() 
+imageb=bytearray(image) 
+
+for index,values in enumerate(imageb): 
+    imageb[index]=values^key 
+file=open(path,'wb') 
+file.write(imageb) 
+file.close()
